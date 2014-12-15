@@ -16,7 +16,7 @@ public class PersonController {
 	private PersonRepository personRepository;
 
 	@RequestMapping("/v1/people")
-	public Iterable<Person> getPeople() {
+	public Iterable<Person> findAll() {
 		return personRepository.findAll();
 	}
 }
