@@ -5,6 +5,8 @@ import hello.repository.v1.DeviceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +18,7 @@ public class DeviceController {
 	private DeviceRepository deviceRepository;
 
 	@RequestMapping("/v1/devices")
-	public Iterable<Device> findAll() {
-		return deviceRepository.findAll();
+	public Page<Device> findAll(Pageable page) {
+		return deviceRepository.findAll(page);
 	}
 }
