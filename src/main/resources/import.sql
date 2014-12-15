@@ -1,1 +1,1 @@
-insert into person(first_name, last_name, name, phone_number) values('Gaurav', 'Sharma', 'Gaurav Sharma', '678-815-2425');
+insert into person(first_name, last_name, name, phone_number) values('Gaurav', 'Sharma', 'Gaurav Sharma', '555-555-5555');
