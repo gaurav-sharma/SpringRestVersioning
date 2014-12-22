@@ -5,8 +5,6 @@ import hello.repository.v1.PlanRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +17,7 @@ public class PlanController {
 	private PlanRepository planRepository;
 
 	@RequestMapping("/v1/plans")
-	public Page<Plan> findAll(Pageable page) {
-		return planRepository.findAll(page);
+	public Iterable<Plan> findAll() {
+		return planRepository.findAll();
 	}
 }

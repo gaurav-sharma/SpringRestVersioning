@@ -1,36 +1,65 @@
 package hello.web;
 
 import hello.web.domain.Device;
+import hello.web.domain.Plan;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class HomeController {
 	
-	@RequestMapping("/greeting")
-    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting";
+	private static final String BASE_API_URL = "http://localhost:8080/api/v1/";
+	
+	@RequestMapping("/")
+    public String home(Model model) {
+		
+		model.addAttribute("page", "index");
+		
+        return "index";
     }
 	
-	@RequestMapping("/devices")
-	public String Home(Model model) {
+	@RequestMapping("/phones")
+	public String phones(Model model) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
-	    Device device = restTemplate.getForObject("http://localhost:8080/api/v1/devices/1", Device.class);
-	    
-	    model.addAttribute("name", device.getName());
-	    model.addAttribute("rate", device.getRate());
-	    model.addAttribute("isSmart", device.isSmart());
-	    
-	    Device[] devices = restTemplate.getForObject("http://localhost:8080/api/v1/devices", Device[].class);
+	    Device[] devices = restTemplate.getForObject(BASE_API_URL + "devices", Device[].class);
 	    model.addAttribute("devices", devices);
 	    
-	    return "devices";
+	    model.addAttribute("page", "phones");
+	    
+	    return "phones";
+	}
+	
+	@RequestMapping("/plans")
+	public String plans(Model model) {
+		
+		RestTemplate restTemplate = new RestTemplate();
+		
+	    Plan[] plans = restTemplate.getForObject(BASE_API_URL + "plans", Plan[].class);
+	    model.addAttribute("plans", plans);
+		
+		model.addAttribute("page", "plans");
+	    
+	    return "plans";
+	}
+	
+	@RequestMapping("/accessories")
+	public String accessories(Model model) {
+		
+		model.addAttribute("page", "accessories");
+	    
+	    return "accessories";
+	}
+	
+	@RequestMapping("/faq")
+	public String faq(Model model) {
+		
+		model.addAttribute("page", "faq");
+	    
+	    return "faq";
 	}
 }
